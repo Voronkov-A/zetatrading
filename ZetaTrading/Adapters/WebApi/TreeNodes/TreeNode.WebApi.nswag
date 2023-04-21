@@ -1,0 +1,27 @@
+{
+  "runtime": "Net70",
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "../../../Contracts/TreeNode.WebApi.yaml"
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpController": {
+      "namespace": "ZetaTrading.Adapters.WebApi.TreeNodes",
+      "output": "TreeNode.WebApi.cs",
+      "controllerBaseClass": "Microsoft.AspNetCore.Mvc.Controller",
+      "controllerStyle": "Abstract",
+      "useCancellationToken": true,
+      "responseArrayType": "System.Collections.Generic.IReadOnlyList",
+      "arrayBaseType": "System.Collections.Generic.List",
+      "jsonLibrary": "SystemTextJson",
+      "excludedTypeNames": [
+        "ErrorModel",
+        "ErrorData"
+      ],
+      "additionalNamespaceUsages": [
+        "ZetaTrading.Adapters.WebApi.Common"
+      ]
+    }
+  }
+}

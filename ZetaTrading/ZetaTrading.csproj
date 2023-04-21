@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+        <UserSecretsId>d16f1802-f5c6-475f-aa6b-8a0b5c71ac36</UserSecretsId>
+        <CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="appsettings.json">
+            <Link>appsettings.json</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Contracts/Errors.Definitions.yaml">
+            <Link>Adapters/WebApi/Common/Errors.Definitions.yaml</Link>
+        </Content>
+        <Content Include="Contracts/Journal.WebApi.yaml">
+            <Link>Adapters/WebApi/Journal/Journal.WebApi.yaml</Link>
+        </Content>
+        <Content Include="Contracts/Tree.WebApi.yaml">
+            <Link>Adapters/WebApi/Trees/Tree.WebApi.yaml</Link>
+        </Content>
+        <Content Include="Contracts/TreeNode.WebApi.yaml">
+            <Link>Adapters/WebApi/TreeNodes/TreeNode.WebApi.yaml</Link>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
+        <PackageReference Include="NSwag.MSBuild" Version="13.18.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <Target Name="NSwag" AfterTargets="BeforeCompile">
+        <Exec Command="$(NSwagExe_Net70) run Adapters/WebApi/Common/Errors.Definitions.nswag" />
+        <Exec Command="$(NSwagExe_Net70) run Adapters/WebApi/Journal/Journal.WebApi.nswag" />
+        <Exec Command="$(NSwagExe_Net70) run Adapters/WebApi/Trees/Tree.WebApi.nswag" />
+        <Exec Command="$(NSwagExe_Net70) run Adapters/WebApi/TreeNodes/TreeNode.WebApi.nswag" />
+    </Target>
+</Project>
